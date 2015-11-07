@@ -5,6 +5,44 @@
     <!-- /.col-lg-12 -->
 </div>
 <div class="row">
+	<form role="form">
+        <div class="form-group">
+    		<p class="text-center lead">Which conditions or tests would you like to compare?</p>
+           <select class="form-control" ng-model="formData.comparison" ng-options="option.name for option in formData.comparisonOptions"></select>
+        </div>
+    <p class="text-center lead">Which dates would you like to examine?</p>
+    <div class="row">
+        <div class="col-md-6">
+            <p class="input-group">
+              <input type="date" class="form-control" uib-datepicker-popup ng-model="dtstart" is-open="statusDtStart.opened" ng-required="true" close-text="Close" />
+              <span class="input-group-btn">
+                <button type="button" class="btn btn-default" ng-click="openStart($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+              </span>
+            </p>
+        </div>
+        <div class="col-md-6">
+            <p class="input-group">
+              <input type="date" class="form-control" uib-datepicker-popup ng-model="dtend" is-open="statusDtEnd.opened" ng-required="true" close-text="Close" />
+              <span class="input-group-btn">
+                <button type="button" class="btn btn-default" ng-click="openEnd($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+              </span>
+            </p>
+        </div>
+    </div>
+    
+    	<p class="text-center lead">Who do you want to compare?</p>
+    	<div class="col-md-6">
+           <select class="form-control" ng-model="formData.practitionerA" ng-options="option.name for option in formData.practitionerList"></select>
+        </div>
+        <div class="col-md-6">
+           <select class="form-control" ng-model="formData.practitionerB" ng-options="option.name for option in formData.practitionerList"></select>
+        </div>
+    </form>
+</div>
+
+<hr />
+
+<div class="row">
     <div class="col-lg-6 col-sm-12" id="line-chart" ng-controller="ChartCtrl">
         <div class="panel panel-default">
             <div class="panel-heading">Line Chart</div>
@@ -24,6 +62,11 @@
         </div>
     </div>
 </div>
+<div class="row">
+	<button type="button" class="btn btn-default pull-right download-data" ng-click="downloadData()">Download Data</button>
+</div>
+
+<!-- 
 <div class="row">
     <div class="col-lg-6 col-sm-12" id="doughnut-chart" ng-controller="ChartCtrl">
         <div class="panel panel-default">
@@ -66,4 +109,5 @@
         </div>
         <button type="button" class="btn btn-primary pull-right" ng-click="dynamic.toggle()">Toggle</button>
     </div>
+ -->
 </div>
