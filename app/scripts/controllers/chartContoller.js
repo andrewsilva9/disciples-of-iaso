@@ -38,17 +38,39 @@ angular.module('sbAdminApp')
   	$scope.formData.dtStart = new Date();
   	$scope.formData.dtEnd = new Date();
   	
-  	$scope.statusDtStart = {};
-  	$scope.statusDtEnd = {}
-  	$scope.openStart = function($event) {
+  	$scope.statusDtStart = {
+  		opened : false
+  	};
+  	$scope.statusDtEnd = {
+  		opened : false
+  	};
+  	$scope.openStart = function() {
     	$scope.statusDtStart.opened = true;
   	};
-  	$scope.openEnd = function($event){
+  	$scope.openEnd = function(){
   		$scope.statusDtEnd.opened = true;
   	};
+	$scope.getNewData = function(){
+		if($scope.formData.dtStart > $scope.formData.dtEnd){
+			$scope.dateError = true;
+			return;
+			}
+		$scope.dateError = false;
+		var request = {
+			condition : $scope.formData.comparison.name,
+			startDate : $scope.formData.dtStart,
+			endDate : $scope.formData.dtEnd,
+			practitionerA : $scope.formData.practitionerA.name,
+			practitionerB : $scope.formData.practitionerB.name
+		};
+		console.log(request);
+		//Make http call for new data. set $scope.line.data to new lines.
+		//set scope.series to appropriate labels.
+		//we'll need $scope.bar.data too possibly
+	}
 
 	$scope.downloadData = function(){
-		console.log($scope.formData);
+		console.log($scope.line.data );
 	};
   	
     $scope.line = {
