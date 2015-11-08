@@ -1,9 +1,58 @@
 <div class="row">
     <div class="col-lg-12">
-        <h1 class="page-header">Charts</h1>
+        <h1 class="page-header">Comparisons</h1>
     </div>
     <!-- /.col-lg-12 -->
 </div>
+<div class="row">
+	<form role="form" ng-submit="getNewData()">
+        <div class="form-group">
+    		<p class="text-center lead">Which conditions or tests would you like to compare?</p>
+           <select class="form-control" ng-model="formData.comparison" ng-options="option.name for option in formData.comparisonOptions"></select>
+        </div>
+    <p class="text-center lead">Which dates would you like to examine?</p>
+    <p class="text-center">Choose a start and end date</p>
+    <div class="row">
+        <div class="col-md-6">
+            <p class="input-group">
+              <input type="date" class="form-control" uib-datepicker-popup ng-model="formData.dtStart" is-open="statusDtStart.opened" ng-required="true" close-text="Close" />
+              <span class="input-group-btn">
+                <button type="button" class="btn btn-default" ng-click="openStart()"><i class="glyphicon glyphicon-calendar"></i></button>
+              </span>
+            </p>
+        </div>
+        <div class="col-md-6">
+            <p class="input-group">
+              <input type="date" class="form-control" uib-datepicker-popup ng-model="formData.dtEnd" is-open="statusDtEnd.opened" ng-required="true" close-text="Close" />
+              <span class="input-group-btn">
+                <button type="button" class="btn btn-default" ng-click="openEnd()"><i class="glyphicon glyphicon-calendar"></i></button>
+              </span>
+            </p>
+        </div>
+        <div class="has-error has-feedback center-block" ng-show="dateError">
+  			<p class="control-label text-center">Start-date must come before end-date
+  				<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+  			</p>
+  			
+		</div>
+    </div>
+    
+    	<p class="text-center lead">Who do you want to compare?</p>
+    	<div class="col-md-6">
+           <select class="form-control" ng-model="formData.practitionerA" ng-options="option.name for option in formData.practitionerList"></select>
+        </div>
+        <div class="col-md-6">
+           <select class="form-control" ng-model="formData.practitionerB" ng-options="option.name for option in formData.practitionerList"></select>
+        </div>
+        
+        <div class="row">
+        	<button type="submit" class="btn btn-default pull-right download-data">Compare</button>
+		</div>
+    </form>
+</div>
+
+<hr />
+
 <div class="row">
     <div class="col-lg-6 col-sm-12" id="line-chart" ng-controller="ChartCtrl">
         <div class="panel panel-default">
@@ -24,6 +73,11 @@
         </div>
     </div>
 </div>
+<div class="row">
+	<button type="button" class="btn btn-default pull-right download-data" ng-click="downloadData()">Download Data</button>
+</div>
+
+<!-- 
 <div class="row">
     <div class="col-lg-6 col-sm-12" id="doughnut-chart" ng-controller="ChartCtrl">
         <div class="panel panel-default">
@@ -66,4 +120,5 @@
         </div>
         <button type="button" class="btn btn-primary pull-right" ng-click="dynamic.toggle()">Toggle</button>
     </div>
+ -->
 </div>
