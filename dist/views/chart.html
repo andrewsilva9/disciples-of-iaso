@@ -1,1 +1,44 @@
-<div class="row"> <div class="col-lg-12"> <h1 class="page-header">Charts</h1> </div> <!-- /.col-lg-12 --> </div> <div class="row"> <div class="col-lg-6 col-sm-12" id="line-chart" ng-controller="ChartCtrl"> <div class="panel panel-default"> <div class="panel-heading">Line Chart</div> <div class="panel-body"> <canvas id="line" class="chart chart-line chart-xl" data="line.data" labels="line.labels" legend="true" click="line.onClick" series="line.series"></canvas> </div> </div> </div> <div class="col-lg-6 col-sm-12" id="bar-chart" ng-controller="ChartCtrl"> <div class="panel panel-default"> <div class="panel-heading">Bar Chart</div> <div class="panel-body"> <canvas id="bar" class="chart chart-bar" data="bar.data" labels="bar.labels" series="bar.series" options="bar.options"></canvas> </div> </div> </div> </div> <div class="row"> <div class="col-lg-6 col-sm-12" id="doughnut-chart" ng-controller="ChartCtrl"> <div class="panel panel-default"> <div class="panel-heading">Doughnut Chart</div> <div class="panel-body"> <canvas id="doughnut" class="chart chart-doughnut chart-xs" data="donut.data" labels="donut.labels" legend="false"></canvas> </div> </div> </div> <div class="col-lg-6 col-sm-12" id="radar-chart" ng-controller="ChartCtrl"> <div class="panel panel-default"> <div class="panel-heading">Radar Chart</div> <div class="panel-body"> <canvas id="area" class="chart chart-radar" data="radar.data" labels="radar.labels" click="onClick"></canvas> </div> </div> </div> <div class="col-lg-6 col-sm-12" id="pie-chart" ng-controller="ChartCtrl"> <div class="panel panel-default"> <div class="panel-heading">Pie Chart</div> <div class="panel-body"> <canvas id="pie" class="chart chart-pie chart-xs" data="pie.data" labels="pie.labels"></canvas> </div> </div> </div> <div class="col-lg-6 col-sm-12" id="polar area-chart" ng-controller="ChartCtrl"> <div class="panel panel-default"> <div class="panel-heading">Polar Area Chart</div> <div class="panel-body"> <canvas id="polar" class="chart chart-polar-area" data="polar.data" labels="polar.labels"></canvas> </div> </div> </div> <div class="col-lg-6 col-sm-12" id="base-chart" ng-controller="ChartCtrl"> <div class="panel panel-default"> <div class="panel-heading">Dynamic Chart</div> <div class="panel-body"> <canvas id="base" class="chart chart-base" chart-type="dynamic.type" data="dynamic.data" labels="dynamic.labels" legend="true"></canvas> </div> </div> <button type="button" class="btn btn-primary pull-right" ng-click="dynamic.toggle()">Toggle</button> </div> </div>
+<div class="row"> <div class="col-lg-12"> <h1 class="page-header">Comparisons</h1> </div> <!-- /.col-lg-12 --> </div> <div class="row"> <form role="form" ng-submit="getNewData()"> <div class="form-group"> <p class="text-center lead">Which conditions or tests would you like to compare?</p> <select class="form-control" ng-model="formData.comparison" ng-options="option.name for option in formData.comparisonOptions"></select> </div> <p class="text-center lead">Which dates would you like to examine?</p> <p class="text-center">Choose a start and end date</p> <div class="row"> <div class="col-md-6"> <p class="input-group"> <input type="date" class="form-control" uib-datepicker-popup ng-model="formData.dtStart" is-open="statusDtStart.opened" ng-required="true" close-text="Close"> <span class="input-group-btn"> <button type="button" class="btn btn-default" ng-click="openStart()"><i class="glyphicon glyphicon-calendar"></i></button> </span> </p> </div> <div class="col-md-6"> <p class="input-group"> <input type="date" class="form-control" uib-datepicker-popup ng-model="formData.dtEnd" is-open="statusDtEnd.opened" ng-required="true" close-text="Close"> <span class="input-group-btn"> <button type="button" class="btn btn-default" ng-click="openEnd()"><i class="glyphicon glyphicon-calendar"></i></button> </span> </p> </div> <div class="has-error has-feedback center-block" ng-show="dateError"> <p class="control-label text-center">Start-date must come before end-date <span class="glyphicon glyphicon-remove" aria-hidden="true"></span> </p> </div> </div> <p class="text-center lead">Who do you want to compare?</p> <div class="col-md-6"> <select class="form-control" ng-model="formData.practitionerA" ng-options="option.name for option in formData.practitionerList"></select> </div> <div class="col-md-6"> <select class="form-control" ng-model="formData.practitionerB" ng-options="option.name for option in formData.practitionerList"></select> </div> <div class="row"> <button type="submit" class="btn btn-default pull-right download-data">Compare</button> </div> </form> </div> <hr> <div class="row"> <div class="col-lg-6 col-sm-12" id="line-chart" ng-controller="ChartCtrl"> <div class="panel panel-default"> <div class="panel-heading">Line Chart</div> <div class="panel-body"> <canvas id="line" class="chart chart-line chart-xl" data="line.data" labels="line.labels" legend="true" click="line.onClick" series="line.series"></canvas> </div> </div> </div> <div class="col-lg-6 col-sm-12" id="bar-chart" ng-controller="ChartCtrl"> <div class="panel panel-default"> <div class="panel-heading">Bar Chart</div> <div class="panel-body"> <canvas id="bar" class="chart chart-bar" data="bar.data" labels="bar.labels" series="bar.series" options="bar.options"></canvas> </div> </div> </div> </div> <div class="row"> <button type="button" class="btn btn-default pull-right download-data" ng-click="downloadData()">Download Data</button> </div> <!-- 
+<div class="row">
+    <div class="col-lg-6 col-sm-12" id="doughnut-chart" ng-controller="ChartCtrl">
+        <div class="panel panel-default">
+            <div class="panel-heading">Doughnut Chart</div>
+            <div class="panel-body">
+            <canvas id="doughnut" class="chart chart-doughnut chart-xs" data="donut.data" labels="donut.labels" legend="false"></canvas>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-6 col-sm-12" id="radar-chart" ng-controller="ChartCtrl">
+        <div class="panel panel-default">
+            <div class="panel-heading">Radar Chart</div>
+            <div class="panel-body">
+                <canvas id="area" class="chart chart-radar" data="radar.data" labels="radar.labels" click="onClick"></canvas>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-6 col-sm-12" id="pie-chart" ng-controller="ChartCtrl">
+        <div class="panel panel-default">
+            <div class="panel-heading">Pie Chart</div>
+            <div class="panel-body">
+                <canvas id="pie" class="chart chart-pie chart-xs" data="pie.data" labels="pie.labels"></canvas>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-6 col-sm-12" id="polar area-chart" ng-controller="ChartCtrl">
+      <div class="panel panel-default">
+        <div class="panel-heading">Polar Area Chart</div>
+        <div class="panel-body">
+          <canvas id="polar" class="chart chart-polar-area" data="polar.data" labels="polar.labels"></canvas>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-6 col-sm-12" id="base-chart" ng-controller="ChartCtrl">
+        <div class="panel panel-default">
+            <div class="panel-heading">Dynamic Chart</div>
+            <div class="panel-body">
+            <canvas id="base" class="chart chart-base" chart-type="dynamic.type" data="dynamic.data" labels="dynamic.labels" legend="true"></canvas>
+            </div>
+        </div>
+        <button type="button" class="btn btn-primary pull-right" ng-click="dynamic.toggle()">Toggle</button>
+    </div>
+ --> 
