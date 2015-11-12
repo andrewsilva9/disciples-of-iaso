@@ -5,9 +5,14 @@
     "type": "git",
     "url": "https://github.com/start-angular/sb-admin-angular"
   },
-  "dependencies": {},
-  "devDependencies": {
+  "dependencies": {
+    "bower": "^1.6.5",
+    "express": "^4.13.3",
     "grunt": "^0.4.1",
+    "morgan": "^1.6.1",
+    "gzippo": "^0.2.0"
+  },
+  "devDependencies": {
     "grunt-autoprefixer": "^0.7.3",
     "grunt-concurrent": "^0.5.0",
     "grunt-contrib-clean": "^0.5.0",
