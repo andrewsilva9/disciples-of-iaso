@@ -12,58 +12,32 @@ angular.module('sbAdminApp')
   	$scope.formData = {};
   	
   	$scope.formData.comparisonOptions = [
-  		{name : "Diabetes / HBA1C"},
-  		{name : "Athsma / Checkups"},
-  		{name : "Condition1 / Test1"},
-  		{name : "Condition5 / Test5"},
-  		{name : "Condition4 / Test4"},
-  		{name : "Condition3 / Test3"},
-  		{name : "Condition2 / Test2"}
+  		{name : "Diabetes / HBA1C", id : 0},
+  		{name : "Athsma / Checkups", id : 1},
+  		{name : "Hypertension / Regulation", id : 2},
+  		{name : "Heart Disease / Exercise", id : 3}
   		];
   	$scope.formData.comparison = $scope.formData.comparisonOptions[0];
   	
   	$scope.formData.practitionerList = [
-  		{name : "Physician A"},
-  		{name : "Physician B"},
-  		{name : "Practice A"},
-  		{name : "Practice B"},
-  		{name : "Georgia Average"},
-  		{name : "California Average"}
+  		{name : "North Georgia", id : 0},
+  		{name : "South Georgia", id : 1},
+  		{name : "Atlanta Area (ITP)", id : 2},
+  		{name : "Atlanta Area (OTP)", id : 3},
+  		{name : "Georgia Statewide", id : 4}
   	];
   	
   	$scope.formData.practitionerA = $scope.formData.practitionerList[0];
   	$scope.formData.practitionerB = $scope.formData.practitionerList[1];
-  	
-  	
-  	$scope.formData.dtStart = new Date();
-  	$scope.formData.dtEnd = new Date();
-  	
-  	$scope.statusDtStart = {
-  		opened : false
-  	};
-  	$scope.statusDtEnd = {
-  		opened : false
-  	};
-  	$scope.openStart = function() {
-    	$scope.statusDtStart.opened = true;
-  	};
-  	$scope.openEnd = function(){
-  		$scope.statusDtEnd.opened = true;
-  	};
+
 	$scope.getNewData = function(){
-		if($scope.formData.dtStart > $scope.formData.dtEnd){
-			$scope.dateError = true;
-			return;
-			}
-		$scope.dateError = false;
-		var request = {
-			condition : $scope.formData.comparison.name,
-			startDate : $scope.formData.dtStart,
-			endDate : $scope.formData.dtEnd,
-			practitionerA : $scope.formData.practitionerA.name,
-			practitionerB : $scope.formData.practitionerB.name
-		};
-		console.log(request);
+		
+    $scope.labelA = $scope.formData.practitionerA.name;
+    $scope.labelB = $scope.formData.practitionerB.name;
+    $scope.comparisonTitle = "Gaps in " + $scope.labelA + " vs. " + $scope.labelB + " concerning " + $scope.formData.comparison.name;
+
+    drawNewCharts();
+
 		//Make http call for new data. set $scope.line.data to new lines.
 		//set scope.series to appropriate labels.
 		//we'll need $scope.bar.data too possibly
@@ -73,64 +47,32 @@ angular.module('sbAdminApp')
 		console.log($scope.line.data );
 	};
   	
+  function drawNewCharts(){
     $scope.line = {
-	    labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
-	    series: ['Series A', 'Series B'],
-	    data: [
-	      [65, 59, 80, 81, 56, 55, 40],
-	      [28, 48, 40, 19, 86, 27, 90]
-	    ],
-	    onClick: function (points, evt) {
-	      console.log(points, evt);
-	    }
+      labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+      series: [$scope.labelA, $scope.labelB],
+      data: [
+        data3D[$scope.formData.comparison.id][$scope.formData.practitionerA.id],
+        data3D[$scope.formData.comparison.id][$scope.formData.practitionerB.id]
+      ],
+      onClick: function (points, evt) {
+        console.log(points, evt);
+      }
     };
-
     $scope.bar = {
-	    labels: ['2006', '2007', '2008', '2009', '2010', '2011', '2012'],
-		series: ['Series A', 'Series B'],
+      labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+      series: [$scope.labelA, $scope.labelB],
+      data: [
+        data3D[$scope.formData.comparison.id][$scope.formData.practitionerA.id],
+        data3D[$scope.formData.comparison.id][$scope.formData.practitionerB.id]
+      ]  
+      };
+  }
 
-		data: [
-		   [65, 59, 80, 81, 56, 55, 40],
-		   [28, 48, 40, 19, 86, 27, 90]
-		]
-    	
-    };
-
-   //  $scope.donut = {
-//     	labels: ["Download Sales", "In-Store Sales", "Mail-Order Sales"],
-//     	data: [300, 500, 100]
-//     };
-// 
-//     $scope.radar = {
-//     	labels:["Eating", "Drinking", "Sleeping", "Designing", "Coding", "Cycling", "Running"],
-// 
-//     	data:[
-//     	    [65, 59, 90, 81, 56, 55, 40],
-//     	    [28, 48, 40, 19, 96, 27, 100]
-//     	]
-//     };
-// 
-//     $scope.pie = {
-//     	labels : ["Download Sales", "In-Store Sales", "Mail-Order Sales"],
-//     	data : [300, 500, 100]
-//     };
-// 
-//     $scope.polar = {
-//     	labels : ["Download Sales", "In-Store Sales", "Mail-Order Sales", "Tele Sales", "Corporate Sales"],
-//     	data : [300, 500, 100, 40, 120]
-//     };
-// 
-//     $scope.dynamic = {
-//     	labels : ["Download Sales", "In-Store Sales", "Mail-Order Sales", "Tele Sales", "Corporate Sales"],
-//     	data : [300, 500, 100, 40, 120],
-//     	type : 'PolarArea',
-// 
-//     	toggle : function () 
-//     	{
-//     		this.type = this.type === 'PolarArea' ?
-//     	    'Pie' : 'PolarArea';
-// 		}
-//     };
+  var data3D = [[[65, 59, 80, 81, 56, 55, 40], [50, 75, 90, 94, 85, 70, 75], [80, 85, 83, 77, 78, 70, 84], [90, 95, 93, 87, 88, 90, 94], [68, 75, 70, 74, 85, 70, 75]],
+  [[65, 59, 80, 81, 56, 55, 40], [50, 75, 90, 94, 85, 70, 75], [80, 85, 83, 77, 78, 70, 84], [90, 95, 93, 87, 88, 90, 94], [68, 75, 70, 74, 85, 70, 75]],
+  [[65, 59, 80, 81, 56, 55, 40], [50, 75, 90, 94, 85, 70, 75], [80, 85, 83, 77, 78, 70, 84], [90, 95, 93, 87, 88, 90, 94], [68, 75, 70, 74, 85, 70, 75]],
+  [[65, 59, 80, 81, 56, 55, 40], [50, 75, 90, 94, 85, 70, 75], [80, 85, 83, 77, 78, 70, 84], [90, 95, 93, 87, 88, 90, 94], [68, 75, 70, 74, 85, 70, 75]]];
     
     
 }]);
