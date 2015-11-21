@@ -10,7 +10,7 @@
     		<p class="text-center lead">Which conditions or tests would you like to compare?</p>
            <select class="form-control" ng-model="formData.comparison" ng-options="option.name for option in formData.comparisonOptions"></select>
         </div>
-    <p class="text-center lead">Which dates would you like to examine?</p>
+    <!-- <p class="text-center lead">Which dates would you like to examine?</p>
     <p class="text-center">Choose a start and end date</p>
     <div class="row">
         <div class="col-md-6">
@@ -35,7 +35,7 @@
   			</p>
   			
 		</div>
-    </div>
+    </div> -->
     
     	<p class="text-center lead">Who do you want to compare?</p>
     	<div class="col-md-6">
@@ -56,8 +56,9 @@
 <div class="row">
     <div class="col-lg-6 col-sm-12" id="line-chart" ng-controller="ChartCtrl">
         <div class="panel panel-default">
-            <div class="panel-heading">Line Chart</div>
+            <div class="panel-heading">{{comparisonTitle}}</div>
             <div class="panel-body">
+                Make a selection above to compare gaps in care.
                 <canvas id="line" class="chart chart-line chart-xl" data="line.data" labels="line.labels" legend="true"
                 click="line.onClick" series="line.series"></canvas>
             </div>
@@ -65,8 +66,9 @@
     </div>
     <div class="col-lg-6 col-sm-12" id="bar-chart" ng-controller="ChartCtrl">
         <div class="panel panel-default">
-            <div class="panel-heading">Bar Chart</div>
+            <div class="panel-heading">{{comparisonTitle}}</div>
             <div class="panel-body">
+                Make a selection above to compare gaps in care.
                 <canvas id="bar" class="chart chart-bar" data="bar.data" labels="bar.labels" series="bar.series"
                 options="bar.options"></canvas>
             </div>

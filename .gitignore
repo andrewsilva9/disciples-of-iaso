@@ -5,5 +5,5 @@ npm-debug.log*
 node_modules
 
 .tmp
-
-.DS_Store
+bower_components/
+node_modules/
