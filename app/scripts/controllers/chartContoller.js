@@ -32,15 +32,15 @@ angular.module('sbAdminApp')
 
 	$scope.getNewData = function(){
 		
+    //set scope.series to appropriate labels.
     $scope.labelA = $scope.formData.practitionerA.name;
     $scope.labelB = $scope.formData.practitionerB.name;
+    //create title for charts
     $scope.comparisonTitle = "Gaps in " + $scope.labelA + " vs. " + $scope.labelB + " concerning " + $scope.formData.comparison.name;
-
+    //draw charts
     drawNewCharts();
 
-		//Make http call for new data. set $scope.line.data to new lines.
-		//set scope.series to appropriate labels.
-		//we'll need $scope.bar.data too possibly
+		//Make http call for new data
 	}
 
 	$scope.downloadData = function(){
@@ -70,9 +70,9 @@ angular.module('sbAdminApp')
   }
 
   var data3D = [[[65, 59, 80, 81, 56, 55, 40], [50, 75, 90, 94, 85, 70, 75], [80, 85, 83, 77, 78, 70, 84], [90, 95, 93, 87, 88, 90, 94], [68, 75, 70, 74, 85, 70, 75]],
-  [[65, 59, 80, 81, 56, 55, 40], [50, 75, 90, 94, 85, 70, 75], [80, 85, 83, 77, 78, 70, 84], [90, 95, 93, 87, 88, 90, 94], [68, 75, 70, 74, 85, 70, 75]],
-  [[65, 59, 80, 81, 56, 55, 40], [50, 75, 90, 94, 85, 70, 75], [80, 85, 83, 77, 78, 70, 84], [90, 95, 93, 87, 88, 90, 94], [68, 75, 70, 74, 85, 70, 75]],
-  [[65, 59, 80, 81, 56, 55, 40], [50, 75, 90, 94, 85, 70, 75], [80, 85, 83, 77, 78, 70, 84], [90, 95, 93, 87, 88, 90, 94], [68, 75, 70, 74, 85, 70, 75]]];
+  [[55, 70, 75, 74, 68, 69, 74], [60, 70, 80, 76, 74, 70, 66], [70, 75, 73, 77, 78, 70, 74], [87, 85, 89, 92, 95, 97, 94], [64, 62, 60, 54, 60, 66, 70]],
+  [[63, 69, 71, 73, 67, 67, 76], [62, 72, 83, 80, 85, 88, 92], [73, 75, 73, 70, 70, 73, 74], [86, 84, 90, 87, 88, 89, 84], [77, 70, 64, 60, 70, 75, 80]],
+  [[73, 61, 81, 82, 72, 70, 80], [80, 75, 84, 88, 85, 88, 85], [77, 75, 73, 68, 64, 60, 64], [88, 93, 92, 96, 92, 90, 88], [60, 50, 45, 55, 68, 70, 73]]];
     
     
 }]);
