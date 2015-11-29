@@ -40,9 +40,11 @@
     	<p class="text-center lead">Who do you want to compare?</p>
     	<div class="col-md-6">
            <select class="form-control" ng-model="formData.practitionerA" ng-options="option.name for option in formData.practitionerList"></select>
+            <p  class="error-text" ng-show="badDataA">It looks like there's not enough data for this provider</p>
         </div>
         <div class="col-md-6">
            <select class="form-control" ng-model="formData.practitionerB" ng-options="option.name for option in formData.practitionerList"></select>
+            <p class="error-text" ng-show="badDataB">It looks like there's not enough data for this provider</p>
         </div>
         
         <div class="row">

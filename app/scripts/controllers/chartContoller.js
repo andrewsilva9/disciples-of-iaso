@@ -8,7 +8,7 @@
  */
 angular.module('sbAdminApp')
   .controller('ChartCtrl', ['$scope', '$timeout', '$http', function ($scope, $timeout, $http) {
-  
+
     //initialization stuff start
     $scope.formData = {};
     
@@ -32,6 +32,8 @@ angular.module('sbAdminApp')
 
     var chartDataA = [0, 0, 0, 0, 0];
     var chartDataB = [0, 0, 0, 0, 0];
+    $scope.badDataA = false;
+    $scope.badDataB = false;
     //initialization stuff end
 
   $scope.getNewData = function(){
@@ -46,10 +48,14 @@ angular.module('sbAdminApp')
     $http.get('http://gtcs.japtem.com/api/resource?gap=' + $scope.formData.comparison.id + '&provider=' + $scope.formData.practitionerA.id)
     .then(function successCallback(response){
       //if no data, set to 0s
-      if(response.data.results.length < 5)
+      if(response.data.results.length < 5){
         chartDataA = [0, 0, 0, 0, 0];
-      else
+        $scope.badDataA = true;
+      }
+      else{
         chartDataA = response.data.results;
+        $scope.badDataA = false;
+      }
 
       //this should be cleaner, right now it's just brute force redrawing every time there's any new data
       drawNewCharts();
@@ -61,10 +67,14 @@ angular.module('sbAdminApp')
     $http.get('http://gtcs.japtem.com/api/resource?gap=' + $scope.formData.comparison.id + '&provider=' + $scope.formData.practitionerB.id)
     .then(function successCallback(response){
       //same as above but with data B
-      if(response.data.results.length < 5)
+      if(response.data.results.length < 5){
         chartDataB = [0, 0, 0, 0, 0];
-      else
+        $scope.badDataB = true;
+      }
+      else{
         chartDataB = response.data.results;
+        $scope.badDataB = false;
+      }
 
       drawNewCharts();
       
