@@ -34,6 +34,7 @@ angular.module('sbAdminApp')
     var chartDataB = [0, 0, 0, 0, 0];
     $scope.badDataA = false;
     $scope.badDataB = false;
+
     //initialization stuff end
 
   $scope.getNewData = function(){
@@ -42,7 +43,7 @@ angular.module('sbAdminApp')
     $scope.labelA = $scope.formData.practitionerA.name;
     $scope.labelB = $scope.formData.practitionerB.name;
     //create title for charts
-    $scope.comparisonTitle = "Gaps in " + $scope.labelA + " vs. " + $scope.labelB + " concerning " + $scope.formData.comparison.name;
+    $scope.comparisonTitle = 'Gaps in ' + $scope.labelA + ' vs. ' + $scope.labelB + ' concerning ' + $scope.formData.comparison.name;
 
     //make HTTP GET for chart data A
     $http.get('http://gtcs.japtem.com/api/resource?gap=' + $scope.formData.comparison.id + '&provider=' + $scope.formData.practitionerA.id)
