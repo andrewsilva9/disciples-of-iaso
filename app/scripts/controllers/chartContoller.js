@@ -13,8 +13,10 @@ angular.module('sbAdminApp')
     $scope.formData = {};
     
     $scope.formData.comparisonOptions = [
-      {name : "Hypertension / Blood Pressure", id : 0},
-      {name : "Outpatients / Checkups", id : 1},
+      {name : "Hypertension", id : 0},
+      {name : "Chronic Obstructive Pulminary Disease", id : 1},
+      {name : "Congestive Heart Failure", id : 2},
+      {name : "Hemoglobin A1C", id : 3},
       ];
     $scope.formData.comparison = $scope.formData.comparisonOptions[0];
     
@@ -49,7 +51,7 @@ angular.module('sbAdminApp')
     $http.get('http://gtcs.japtem.com/api/resource?gap=' + $scope.formData.comparison.id + '&provider=' + $scope.formData.practitionerA.id)
     .then(function successCallback(response){
       //if no data, set to 0s
-      if(response.data.results.length < 5){
+      if(response.data.results.length < 5 || response.data.results === [0, 0, 0, 0, 0]){
         chartDataA = [0, 0, 0, 0, 0];
         $scope.badDataA = true;
       }
@@ -68,7 +70,7 @@ angular.module('sbAdminApp')
     $http.get('http://gtcs.japtem.com/api/resource?gap=' + $scope.formData.comparison.id + '&provider=' + $scope.formData.practitionerB.id)
     .then(function successCallback(response){
       //same as above but with data B
-      if(response.data.results.length < 5){
+      if(response.data.results.length < 5 || response.data.results === [0, 0, 0, 0, 0]){
         chartDataB = [0, 0, 0, 0, 0];
         $scope.badDataB = true;
       }
