@@ -26,7 +26,8 @@ angular.module('sbAdminApp')
       {name : "Provider 3", id : 3},
       {name : "Provider 4", id : 4},
       {name : "Provider 5", id : 5},
-      {name : "Provider 6", id : 6}
+      {name : "Provider 6", id : 6},
+      {name : "Georgia Average", id: -1}
     ];
     
     $scope.formData.practitionerA = $scope.formData.practitionerList[0];
